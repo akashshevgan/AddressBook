@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class AddressBook {
@@ -24,6 +26,38 @@ public class AddressBook {
     public static void main(String[] args) {
 
         System.out.println("Welcome to Address Book Program");
+        List<AddressBook> addressBooks = new ArrayList<>();
+        System.out.println("add address book 1 please enter");
+        addRecord(addressBooks);
+        System.out.println("add address book 2 please enter");
+        addRecord(addressBooks);
+        System.out.println("add address book 3 please enter");
+        addRecord(addressBooks);
+        System.out.println("enter person first name for update");
+        Scanner in = new Scanner(System.in);
+        String firstName = in.nextLine();
+        AddressBook addressBook = searchRecord(firstName, addressBooks);
+        if (addressBook==null){
+            System.out.println("record not found");
+            System.exit(0);
+        }
+        addressBooks.remove(addressBook);
+        addRecord(addressBooks);
+
+    }
+
+    static AddressBook searchRecord(String firstName, List<AddressBook> addressBooks){
+        for(AddressBook addressBook: addressBooks){
+            if(addressBook.getPerson().getFirstName().equals(firstName)){
+                return addressBook;
+            }
+        }
+        return null;
+
+    }
+
+    static void addRecord(List<AddressBook> addressBooks){
+
         Scanner in = new Scanner(System.in);
         Person person = new Person();
         Contact contact = new Contact();
@@ -54,6 +88,8 @@ public class AddressBook {
         AddressBook addressBook = new AddressBook();
         addressBook.setPerson(person);
         addressBook.setContact(contact);
+        addressBooks.add(addressBook);
+
         System.out.println("FirstName = " + addressBook.getPerson().getFirstName());
         System.out.println("lastName = " + addressBook.getPerson().getLastName());
         System.out.println("City = " + addressBook.getContact().getCity());
@@ -61,8 +97,9 @@ public class AddressBook {
         System.out.println("State = " + addressBook.getContact().getState());
         System.out.println("PhoneNumber = " + addressBook.getContact().getPhoneNumber());
         System.out.println("Zipcode = " + addressBook.getContact().getZipCode());
-
     }
+
+
 
 
 }
