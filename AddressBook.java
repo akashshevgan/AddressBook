@@ -33,7 +33,7 @@ public class AddressBook {
         addRecord(addressBooks);
         System.out.println("add address book 3 please enter");
         addRecord(addressBooks);
-        System.out.println("enter person first name for update");
+        System.out.println("enter person first name for delete");
         Scanner in = new Scanner(System.in);
         String firstName = in.nextLine();
         AddressBook addressBook = searchRecord(firstName, addressBooks);
@@ -42,7 +42,8 @@ public class AddressBook {
             System.exit(0);
         }
         addressBooks.remove(addressBook);
-        addRecord(addressBooks);
+        System.out.println("record deleted");
+        recordAfterDelete(addressBooks);
 
     }
 
@@ -51,6 +52,20 @@ public class AddressBook {
             if(addressBook.getPerson().getFirstName().equals(firstName)){
                 return addressBook;
             }
+        }
+        return null;
+
+    }
+
+    static AddressBook recordAfterDelete(List<AddressBook> addressBooks){
+        for(AddressBook addressBook: addressBooks){
+            System.out.println("FirstName = " + addressBook.getPerson().getFirstName());
+            System.out.println("lastName = " + addressBook.getPerson().getLastName());
+            System.out.println("City = " + addressBook.getContact().getCity());
+            System.out.println("Email = " + addressBook.getContact().getEmail());
+            System.out.println("State = " + addressBook.getContact().getState());
+            System.out.println("PhoneNumber = " + addressBook.getContact().getPhoneNumber());
+            System.out.println("Zipcode = " + addressBook.getContact().getZipCode());
         }
         return null;
 
